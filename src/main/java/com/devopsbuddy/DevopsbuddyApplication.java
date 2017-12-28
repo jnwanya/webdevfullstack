@@ -31,11 +31,15 @@ public class DevopsbuddyApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... strings) throws Exception {
-         User basicUser = UserUtils.createBasicUser();
-		 Set<UserRole> userRoles = new HashSet<>();
-		 userRoles.add(new UserRole(basicUser, new Role(RoleEnums.BASIC)));
-		 LOG.debug("Creating user with username {}", basicUser.getUsername());
-		 userService.createUser(basicUser, PlanEnums.BASIC, userRoles);
-		 LOG.info("User {} created.", basicUser.getUsername());
+
+		String username = "proUser";
+		String email = "prouser@devopsbuddy.com";
+
+		User basicUser = UserUtils.createBasicUser(username, email);
+		Set<UserRole> userRoles = new HashSet<>();
+		userRoles.add(new UserRole(basicUser, new Role(RoleEnums.BASIC)));
+		LOG.debug("Creating user with username {}", basicUser.getUsername());
+		userService.createUser(basicUser, PlanEnums.BASIC, userRoles);
+		LOG.info("User {} created.", basicUser.getUsername());
 	}
 }

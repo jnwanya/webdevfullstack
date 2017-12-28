@@ -9,7 +9,9 @@ import com.devopsbuddy.enums.PlanEnums;
 import com.devopsbuddy.enums.RoleEnums;
 import com.devopsbuddy.utils.UserUtils;
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TestName;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -29,15 +31,21 @@ public class UserIntegrationTest {
     @Autowired
     private UserService userService;
 
+    @Rule
+    public TestName testName = new TestName();
+
     @Test
     public void testCreateNewUser(){
 
-        User basicUser = UserUtils.createBasicUser();
+        String username = testName.getMethodName();
+        String email = testName.getMethodName() + ".devopsbuddy.com";
+
+        User basicUser = UserUtils.createBasicUser(username, email);
         Set<UserRole> userRoles = new HashSet<>();
-        UserRole userRole = new UserRole(basicUser, new Role(RoleEnums.BASIC));
+        UserRole userRole = new UserRole(basicUser, new Role(RoleEnums.PRO));
         userRoles.add(userRole);
 
-        User createdUser = userService.createUser(basicUser, PlanEnums.BASIC, userRoles);
+        User createdUser = userService.createUser(basicUser, PlanEnums.PRO, userRoles);
         Assert.assertTrue(createdUser.getId() != 0);
         Assert.assertNotNull(createdUser.getPlan());
 

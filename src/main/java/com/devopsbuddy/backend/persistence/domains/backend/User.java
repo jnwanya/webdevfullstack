@@ -24,7 +24,11 @@ public class User implements Serializable, UserDetails {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @Column(unique = true)
     private String username;
+
+    @Column(unique = true)
+    private String email;
 
     private String password;
 
@@ -124,6 +128,14 @@ public class User implements Serializable, UserDetails {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getProfileImageUrl() {

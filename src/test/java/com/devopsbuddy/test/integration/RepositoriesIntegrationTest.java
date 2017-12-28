@@ -13,7 +13,9 @@ import com.devopsbuddy.enums.RoleEnums;
 import com.devopsbuddy.utils.UserUtils;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TestName;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -36,6 +38,8 @@ public class RepositoriesIntegrationTest {
     private UserRepository userRepository;
     @Autowired
     private RoleRepository roleRepository;
+
+    @Rule public TestName testName = new TestName();
 
 
     @Before
@@ -62,12 +66,16 @@ public class RepositoriesIntegrationTest {
     }
     @Test
     public void testCreateNewUser() throws Exception{
-       User newUser = createUser();
+
+        String username = testName.getMethodName();
+        String email = testName.getMethodName() + ".devopsbuddy.com";
+
+        User newUser = createUser(username, email);
         Assert.assertNotNull(newUser);
         Assert.assertTrue(newUser.getId() != 0);
         Assert.assertNotNull(newUser.getPlan());
         Assert.assertNotNull(newUser.getPlan().getId());
-        for(UserRole userRole : newUser.getUserRoles()){
+        for (UserRole userRole : newUser.getUserRoles()) {
             Assert.assertNotNull(userRole.getRole());
             Assert.assertNotNull(userRole.getRole().getId());
         }
@@ -75,7 +83,9 @@ public class RepositoriesIntegrationTest {
 
     @Test
     public void testDeleteUser() throws Exception {
-        User newUser = createUser();
+        String username = testName.getMethodName();
+        String email = testName.getMethodName() + ".devopsbuddy.com";
+        User newUser = createUser(username, email);
         userRepository.delete(newUser.getId());
     }
 
@@ -86,11 +96,11 @@ public class RepositoriesIntegrationTest {
         return new Role(roleEnums);
     }
 
-    private User createUser(){
+    private User createUser(String username, String email){
         Plan basicPlan = new Plan(PlanEnums.BASIC);
         planRepository.save(basicPlan);
 
-        User basicUser = UserUtils.createBasicUser();
+        User basicUser = UserUtils.createBasicUser(username, email);
         basicUser.setPlan(basicPlan);
 
         Role basicRole = new Role(RoleEnums.BASIC);
