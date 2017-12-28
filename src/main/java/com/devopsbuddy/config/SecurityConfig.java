@@ -1,5 +1,6 @@
 package com.devopsbuddy.config;
 
+import com.devopsbuddy.backend.service.UserSecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
@@ -21,6 +22,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private Environment environment;
+    @Autowired
+    private UserSecurityService userSecurityService;
+
 
     /* Public URLs */
     private static final String[] PUBLIC_MATCHERS = {
@@ -57,8 +61,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
-                .inMemoryAuthentication()
-                .withUser("user").password("password")
-                .roles("USER");
+                .userDetailsService(userSecurityService);
     }
 }

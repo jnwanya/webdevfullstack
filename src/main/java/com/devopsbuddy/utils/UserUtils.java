@@ -6,18 +6,19 @@ import com.devopsbuddy.backend.persistence.domains.backend.User;
  * Created by Jnwanya on
  * Thu, 28 Dec, 2017.
  */
-public class UsersUtils {
+public class UserUtils {
 
-    private UsersUtils(){
+    private UserUtils(){
        throw new AssertionError("Non instantiable");
     }
 
     public static User createBasicUser(){
         User user = new User();
-        user.setFirstName("Justin");
-        user.setLastName("Nwanya");
+        user.setPassword("secret");
+        user.setFirstName("John");
+        user.setLastName("Okafor");
         user.setCountry("NG");
-        user.setUsername("jnwanya");
+        user.setUsername("john");
         user.setEnabled(true);
         user.setPhoneNumber("08067507380");
         user.setDescription("A basic User");

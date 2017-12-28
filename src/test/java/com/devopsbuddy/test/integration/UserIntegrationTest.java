@@ -1,14 +1,13 @@
 package com.devopsbuddy.test.integration;
 
 import com.devopsbuddy.DevopsbuddyApplication;
-import com.devopsbuddy.backend.persistence.domains.backend.Plan;
 import com.devopsbuddy.backend.persistence.domains.backend.Role;
 import com.devopsbuddy.backend.persistence.domains.backend.User;
 import com.devopsbuddy.backend.persistence.domains.backend.UserRole;
 import com.devopsbuddy.backend.service.UserService;
 import com.devopsbuddy.enums.PlanEnums;
 import com.devopsbuddy.enums.RoleEnums;
-import com.devopsbuddy.utils.UsersUtils;
+import com.devopsbuddy.utils.UserUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,7 +32,7 @@ public class UserIntegrationTest {
     @Test
     public void testCreateNewUser(){
 
-        User basicUser = UsersUtils.createBasicUser();
+        User basicUser = UserUtils.createBasicUser();
         Set<UserRole> userRoles = new HashSet<>();
         UserRole userRole = new UserRole(basicUser, new Role(RoleEnums.BASIC));
         userRoles.add(userRole);
