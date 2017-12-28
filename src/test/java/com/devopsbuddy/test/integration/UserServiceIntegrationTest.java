@@ -26,7 +26,7 @@ import java.util.Set;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = DevopsbuddyApplication.class)
-public class UserServiceIntegrationTest {
+public class UserServiceIntegrationTest extends AbstractServiceIntegrationTest {
 
     @Autowired
     private UserService userService;
@@ -37,17 +37,9 @@ public class UserServiceIntegrationTest {
     @Test
     public void testCreateNewUser(){
 
-        String username = testName.getMethodName();
-        String email = testName.getMethodName() + ".devopsbuddy.com";
-
-        User basicUser = UserUtils.createBasicUser(username, email);
-        Set<UserRole> userRoles = new HashSet<>();
-        UserRole userRole = new UserRole(basicUser, new Role(RoleEnums.PRO));
-        userRoles.add(userRole);
-
-        User createdUser = userService.createUser(basicUser, PlanEnums.PRO, userRoles);
-        Assert.assertTrue(createdUser.getId() != 0);
-        Assert.assertNotNull(createdUser.getPlan());
+        User basicUser = createUser(testName);
+        Assert.assertNotNull(basicUser);
+        Assert.assertNotNull(basicUser.getId());
 
     }
 }
