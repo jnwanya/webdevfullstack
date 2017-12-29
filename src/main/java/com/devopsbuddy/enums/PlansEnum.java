@@ -4,7 +4,7 @@ package com.devopsbuddy.enums;
  * Created by Jnwanya on
  * Wed, 27 Dec, 2017.
  */
-public enum PlanEnums {
+public enum PlansEnum {
 
     BASIC(1, "Basic"),
     PRO(2, "Pro");
@@ -12,7 +12,7 @@ public enum PlanEnums {
     private final int id;
     private final String planName;
 
-    PlanEnums(int id, String planName){
+    PlansEnum(int id, String planName){
         this.id = id;
         this.planName = planName;
     }

@@ -8,7 +8,7 @@ import com.devopsbuddy.backend.persistence.repositories.PasswordResetTokenReposi
 import com.devopsbuddy.backend.persistence.repositories.PlanRepository;
 import com.devopsbuddy.backend.persistence.repositories.RoleRepository;
 import com.devopsbuddy.backend.persistence.repositories.UserRepository;
-import com.devopsbuddy.enums.PlanEnums;
+import com.devopsbuddy.enums.PlansEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,12 +45,12 @@ public class UserService {
     private static final Logger LOG = LoggerFactory.getLogger(UserService.class);
 
     @Transactional
-    public User createUser(User user, PlanEnums planEnums, Set<UserRole> userRoles) {
+    public User createUser(User user, PlansEnum plansEnum, Set<UserRole> userRoles) {
 
         String encryptedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encryptedPassword);
 
-        Plan plan = new Plan(planEnums);
+        Plan plan = new Plan(plansEnum);
         if (!planRepository.exists(plan.getId())) {
             planRepository.save(plan);
         }

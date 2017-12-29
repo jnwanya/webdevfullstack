@@ -7,8 +7,8 @@ import com.devopsbuddy.backend.persistence.domains.backend.UserRole;
 import com.devopsbuddy.backend.persistence.repositories.PlanRepository;
 import com.devopsbuddy.backend.persistence.repositories.RoleRepository;
 import com.devopsbuddy.backend.persistence.repositories.UserRepository;
-import com.devopsbuddy.enums.PlanEnums;
-import com.devopsbuddy.enums.RoleEnums;
+import com.devopsbuddy.enums.PlansEnum;
+import com.devopsbuddy.enums.RolesEnum;
 import com.devopsbuddy.utils.UserUtils;
 import org.junit.rules.TestName;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,21 +29,21 @@ public abstract class AbstractIntegrationTest {
     @Autowired
     protected RoleRepository roleRepository;
 
-    protected Plan createBasicPlan(PlanEnums planEnums){
-        return new Plan(planEnums);
+    protected Plan createBasicPlan(PlansEnum plansEnum){
+        return new Plan(plansEnum);
     }
-    protected Role createBasicRole(RoleEnums roleEnums){
-        return new Role(roleEnums);
+    protected Role createBasicRole(RolesEnum rolesEnum){
+        return new Role(rolesEnum);
     }
 
     protected User createUser(String username, String email){
-        Plan basicPlan = new Plan(PlanEnums.BASIC);
+        Plan basicPlan = new Plan(PlansEnum.BASIC);
         planRepository.save(basicPlan);
 
         User basicUser = UserUtils.createBasicUser(username, email);
         basicUser.setPlan(basicPlan);
 
-        Role basicRole = new Role(RoleEnums.BASIC);
+        Role basicRole = new Role(RolesEnum.BASIC);
         roleRepository.save(basicRole);
 
         Set<UserRole> userRoles = new HashSet<>();

@@ -4,7 +4,7 @@ package com.devopsbuddy.enums;
  * Created by Jnwanya on
  * Wed, 27 Dec, 2017.
  */
-public enum RoleEnums {
+public enum RolesEnum {
     BASIC(1, "ROLE_BASIC"),
     PRO(2, "ROLE_PRO"),
     ADMIN(3, "ROLE_ADMIN");
@@ -12,7 +12,7 @@ public enum RoleEnums {
     private final int id;
     private final String roleName;
 
-    RoleEnums(int id, String roleName){
+    RolesEnum(int id, String roleName){
         this.id = id;
         this.roleName = roleName;
     }

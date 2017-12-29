@@ -3,13 +3,13 @@ package com.devopsbuddy.test.unit;
 import com.devopsbuddy.backend.persistence.domains.backend.User;
 import com.devopsbuddy.utils.UserUtils;
 import com.devopsbuddy.web.controllers.ForgotMyPasswordController;
-//import com.devopsbuddy.web.domain.frontend.BasicAccountPayload;
+import com.devopsbuddy.web.domain.frontend.BasicAccountPayload;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
-//import uk.co.jemos.podam.api.PodamFactory;
-//import uk.co.jemos.podam.api.PodamFactoryImpl;
+
+
 
 import java.util.UUID;
 

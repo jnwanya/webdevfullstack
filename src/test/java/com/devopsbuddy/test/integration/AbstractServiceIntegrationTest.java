@@ -5,8 +5,8 @@ import com.devopsbuddy.backend.persistence.domains.backend.Role;
 import com.devopsbuddy.backend.persistence.domains.backend.User;
 import com.devopsbuddy.backend.persistence.domains.backend.UserRole;
 import com.devopsbuddy.backend.service.UserService;
-import com.devopsbuddy.enums.PlanEnums;
-import com.devopsbuddy.enums.RoleEnums;
+import com.devopsbuddy.enums.PlansEnum;
+import com.devopsbuddy.enums.RolesEnum;
 import com.devopsbuddy.utils.UserUtils;
 import org.junit.rules.TestName;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +28,8 @@ public abstract class AbstractServiceIntegrationTest {
 
         Set<UserRole> userRoles = new HashSet<>();
         User basicUser = UserUtils.createBasicUser(username, email);
-        userRoles.add(new UserRole(basicUser, new Role(RoleEnums.BASIC)));
+        userRoles.add(new UserRole(basicUser, new Role(RolesEnum.BASIC)));
 
-        return userService.createUser(basicUser, PlanEnums.BASIC, userRoles);
+        return userService.createUser(basicUser, PlansEnum.BASIC, userRoles);
     }
 }

@@ -3,9 +3,10 @@ package com.devopsbuddy;
 import com.devopsbuddy.backend.persistence.domains.backend.Role;
 import com.devopsbuddy.backend.persistence.domains.backend.User;
 import com.devopsbuddy.backend.persistence.domains.backend.UserRole;
+import com.devopsbuddy.backend.service.PlanService;
 import com.devopsbuddy.backend.service.UserService;
-import com.devopsbuddy.enums.PlanEnums;
-import com.devopsbuddy.enums.RoleEnums;
+import com.devopsbuddy.enums.PlansEnum;
+import com.devopsbuddy.enums.RolesEnum;
 import com.devopsbuddy.utils.UserUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +31,9 @@ public class DevopsbuddyApplication implements CommandLineRunner{
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private PlanService planService;
+
 	@Value("${webmaster.username}")
 	private String webmasterUsername;
 
@@ -42,12 +46,15 @@ public class DevopsbuddyApplication implements CommandLineRunner{
 	@Override
 	public void run(String... strings) throws Exception {
 
+		planService.createPlan(PlansEnum.BASIC.getId());
+		planService.createPlan(PlansEnum.PRO.getId());
+
 		User basicUser = UserUtils.createBasicUser(webmasterUsername, webmasterEmail);
 		basicUser.setPassword(webmasterPassword);
 		Set<UserRole> userRoles = new HashSet<>();
-		userRoles.add(new UserRole(basicUser, new Role(RoleEnums.ADMIN)));
+		userRoles.add(new UserRole(basicUser, new Role(RolesEnum.ADMIN)));
 		LOG.debug("Creating user with username {}", basicUser.getUsername());
-		userService.createUser(basicUser, PlanEnums.PRO, userRoles);
+		userService.createUser(basicUser, PlansEnum.PRO, userRoles);
 		LOG.info("User {} created.", basicUser.getUsername());
 	}
 }

@@ -1,6 +1,6 @@
 package com.devopsbuddy.backend.persistence.domains.backend;
 
-import com.devopsbuddy.enums.RoleEnums;
+import com.devopsbuddy.enums.RolesEnum;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -29,9 +29,9 @@ public class Role implements Serializable {
     public Role(){
 
     }
-    public Role(RoleEnums roleEnums){
-        this.id = roleEnums.getId();
-        this.name = roleEnums.getRoleName();
+    public Role(RolesEnum rolesEnum){
+        this.id = rolesEnum.getId();
+        this.name = rolesEnum.getRoleName();
     }
 
     public int getId() {
